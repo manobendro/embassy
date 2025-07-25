@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'examples/rp/target/thumbv6m-none-eabi/debug/blinky.uf2'
+elf = 'examples/rp/target/thumbv6m-none-eabi/debug/blinky'
