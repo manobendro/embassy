@@ -663,18 +663,22 @@ unsafe fn pre_init() {
     // So, we have to force-on PROC0 to prevent it from getting reset when resetting SIO.
     #[cfg(feature = "rp2040")]
     {
-        pac::PSM.frce_on().write_and_wait(|w| {
-            w.set_proc0(true);
-        });
-        // Then reset SIO and PROC1.
-        pac::PSM.frce_off().write_and_wait(|w| {
-            w.set_sio(true);
-            w.set_proc1(true);
-        });
-        // clear force_off first, force_on second. The other way around would reset PROC0.
-        pac::PSM.frce_off().write_and_wait(|_| {});
-        pac::PSM.frce_on().write_and_wait(|_| {});
+        //This empty block is for wokwi emulators where PSM is not implimented
     }
+    // #[cfg(feature = "rp2040")]
+    // {
+    //     pac::PSM.frce_on().write_and_wait(|w| {
+    //         w.set_proc0(true);
+    //     });
+    //     // Then reset SIO and PROC1.
+    //     pac::PSM.frce_off().write_and_wait(|w| {
+    //         w.set_sio(true);
+    //         w.set_proc1(true);
+    //     });
+    //     // clear force_off first, force_on second. The other way around would reset PROC0.
+    //     pac::PSM.frce_off().write_and_wait(|_| {});
+    //     pac::PSM.frce_on().write_and_wait(|_| {});
+    // }
 
     #[cfg(feature = "_rp235x")]
     {
