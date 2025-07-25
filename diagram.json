@@ -27,7 +27,8 @@
       "left": 163.43,
       "attrs": { "i2cAddress": "0x3c" }
     },
-    { "type": "wokwi-logic-analyzer", "id": "logic1", "top": -239.65, "left": 115.2, "attrs": {} }
+    { "type": "wokwi-logic-analyzer", "id": "logic1", "top": -239.65, "left": 115.2, "attrs": {} },
+    { "type": "wokwi-neopixel", "id": "rgb1", "top": 207.7, "left": 123.8, "attrs": {} }
   ],
   "connections": [
     [ "pico:GP0", "$serialMonitor:RX", "", [] ],
@@ -44,7 +45,10 @@
     [ "pico:GP19", "logic1:D1", "cyan", [ "h24", "v-377.55" ] ],
     [ "oled1:SDA", "pico:GP18", "purple", [ "v-38.4", "h-143.93", "v300.75" ] ],
     [ "oled1:SCL", "pico:GP19", "cyan", [ "v-28.8", "h-124.5", "v281.55" ] ],
-    [ "pico:VBUS", "oled1:VCC", "red", [ "h52.8", "v-127.95", "h86.4" ] ]
+    [ "pico:VBUS", "oled1:VCC", "red", [ "h52.8", "v-127.95", "h86.4" ] ],
+    [ "rgb1:DIN", "pico:GP16", "green", [ "h18.4", "v-9.6" ] ],
+    [ "rgb1:VDD", "dht1:VCC", "red", [ "h-19.2", "v-28.8" ] ],
+    [ "rgb1:VSS", "dht1:GND", "black", [ "v-0.9", "h85.6" ] ]
   ],
   "serialMonitor": { "display": "auto", "newline": "none", "convertEol": true },
   "dependencies": {}

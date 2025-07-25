@@ -1,5 +1,12 @@
 [wokwi]
 version = 1
-firmware = 'examples/rp/target/thumbv6m-none-eabi/debug/blinky.uf2'
-elf = 'examples/rp/target/thumbv6m-none-eabi/debug/blinky'
+# Pico onboard led blink example
+# firmware = 'examples/rp/target/thumbv6m-none-eabi/debug/blinky.uf2'
+# elf = 'examples/rp/target/thumbv6m-none-eabi/debug/blinky'
 gdbServerPort=3333
+# WS2812 neopixel example
+# firmware = 'examples/rp/target/thumbv6m-none-eabi/debug/pio_ws2812.uf2'
+# elf = 'examples/rp/target/thumbv6m-none-eabi/debug/pio_ws2812'
+# SSD1306 display example
+firmware = 'examples/rp/target/thumbv6m-none-eabi/debug/ssd1306.uf2'
+elf = 'examples/rp/target/thumbv6m-none-eabi/debug/ssd1306'
