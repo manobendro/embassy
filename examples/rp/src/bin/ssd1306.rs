@@ -7,15 +7,14 @@
 
 use defmt::*;
 use embassy_executor::Spawner;
-use embassy_rp::gpio;
 use embassy_rp::bind_interrupts;
+use embassy_rp::gpio;
 use embassy_rp::i2c::{self, Config, InterruptHandler};
 use embassy_rp::peripherals::I2C1;
 use embassy_time::Timer;
 use gpio::{Level, Output};
-use embedded_hal_async::i2c::I2c;
+// use embedded_hal_async::i2c::I2c;
 use {defmt_rtt as _, panic_probe as _};
-
 
 use embedded_graphics::{
     mono_font::{ascii::FONT_6X10, MonoTextStyleBuilder},
@@ -23,12 +22,16 @@ use embedded_graphics::{
     prelude::*,
     text::{Baseline, Text},
 };
-use ssd1306::{mode::BufferedGraphicsMode, prelude::*, I2CDisplayInterface, Ssd1306};
+use ssd1306::{
+    // mode::BufferedGraphicsMode,
+    prelude::*,
+    I2CDisplayInterface,
+    Ssd1306,
+};
 
 bind_interrupts!(struct Irqs {
     I2C1_IRQ => InterruptHandler<I2C1>;
 });
-
 
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) {
@@ -38,14 +41,11 @@ async fn main(_spawner: Spawner) {
     let sda = p.PIN_18;
     let scl = p.PIN_19;
 
-    let mut i2c = i2c::I2c::new_async(p.I2C1, scl, sda, Irqs, Config::default());
+    let i2c = i2c::I2c::new_async(p.I2C1, scl, sda, Irqs, Config::default());
 
     let interface = I2CDisplayInterface::new(i2c);
-    let mut display = Ssd1306::new(
-        interface,
-        DisplaySize128x64,
-        DisplayRotation::Rotate0,
-    ).into_buffered_graphics_mode();
+    let mut display =
+        Ssd1306::new(interface, DisplaySize128x64, DisplayRotation::Rotate0).into_buffered_graphics_mode();
     display.init().unwrap();
 
     let text_style = MonoTextStyleBuilder::new()
